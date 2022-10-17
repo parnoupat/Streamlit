@@ -1,8 +1,3 @@
-from calendar import c
-from collections import namedtuple
-from curses import color_content
-from tkinter.filedialog import SaveFileDialog
-from turtle import color
 import altair as alt
 import math
 import pandas as pd
