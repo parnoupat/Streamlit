@@ -102,5 +102,5 @@ components.html(
       </div>
     </div>
     """,
-    height=500,
+    height=100,
 )
