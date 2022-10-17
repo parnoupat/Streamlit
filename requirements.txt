@@ -1,4 +1,5 @@
 # requirements.txt
+
 gsheetsdb==0.1.13.1
 geopandas
 leafmap
@@ -9,3 +10,4 @@ GSPREAD_RECORD
 google-api-python-client 
 google-auth-httplib2 
 google-auth-oauthlib
+pandas
