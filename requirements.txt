@@ -4,4 +4,4 @@ geopandas
 leafmap
 osmnx
 streamlit==1.13.0
-gspread_pandas
+gspread
