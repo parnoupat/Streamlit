@@ -32,13 +32,16 @@ mo-imports==3.149.20327
 mo-kwargs==4.22.21108
 mo-logs==4.23.21108
 moz-sql-parser==4.40.21126
+networkx==2.8.7
 numpy==1.23.4
 oauthlib==3.2.1
 packaging==21.3
 pandas==1.5.0
+pbr==5.10.0
 pillow==9.2.0
 pip==22.3
 protobuf==3.20.3
+pubchempy==1.0.4
 pyarrow==9.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
@@ -47,6 +50,7 @@ pygments==2.13.0
 pympler==1.0.1
 pyparsing==3.0.9
 pyrsistent==0.18.1
+pysmiles==1.0.1
 python-dateutil==2.8.2
 pytz==2022.4
 pytz-deprecation-shim==0.1.0.post0
@@ -67,4 +71,5 @@ tzlocal==4.2
 uritemplate==4.1.1
 urllib3==1.26.12
 validators==0.20.0
+watchdog==2.1.9
 zipp==3.9.0
