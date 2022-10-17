@@ -1,13 +1,10 @@
 # requirements.txt
 
+streamlit == 1.12.0
+pandas==1.4.4
+gspread_pandas==2.3.0
+google-auth==1.21.2
+google_api_python_client
 gsheetsdb==0.1.13.1
-geopandas
-leafmap
-osmnx
-streamlit==1.13.0
-gspread-pandas==3.2.2
-GSPREAD_RECORD
-google-api-python-client 
-google-auth-httplib2 
-google-auth-oauthlib
-pandas
+google-oauth2-tool ==0.0.3
+gspread==3.4.2
