@@ -26,6 +26,7 @@ importlib-metadata==5.0.0
 jinja2==3.1.2
 jsonschema==4.16.0
 markupsafe==2.1.1
+matplotlib==3.6.1
 mo-dots==4.22.21108
 mo-future==3.147.20327
 mo-imports==3.149.20327
