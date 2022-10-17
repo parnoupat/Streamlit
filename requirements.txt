@@ -1,5 +1,5 @@
 # requirements.txt
-gsheetsdb==0.1.13
+gsheetsdb
 geopandas
 leafmap
 osmnx
