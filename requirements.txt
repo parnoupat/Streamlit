@@ -3,4 +3,4 @@ gsheetsdb==0.1.13.1
 geopandas
 leafmap
 osmnx
-streamlit==1.10.0
+streamlit==1.13.0
