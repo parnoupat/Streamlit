@@ -23,11 +23,11 @@ from gsheetsdb import connect
 # Create a connection object.
 scope=["https://www.googleapis.com/auth/spreadsheets"]
 credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"], scopes=scope)
+    st.secrets["gcp_service_account"], scopes=scope,)
 client = Client(scope=scope,creds=credentials)
-spreadsheetname = "Database"
+spreadsheetname = "Sheet1"
 spread = Spread(spreadsheetname,client = client) 
-#conn = connect(credentials=credentials)
+conn = connect(credentials=credentials)
 
 # Check the connection
 st.write(spread.url)
