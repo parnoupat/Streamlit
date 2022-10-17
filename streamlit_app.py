@@ -9,7 +9,7 @@ from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-SPREADSHEET_ID = "1DZUnRl0vcmpP5rC4eUwIQy-CM1BQ2XYK6Sy_4vsLpRU"
+SPREADSHEET_ID = "1q0cETbDJDF66gF8jVQ8MMuJr6-jGAStutywpibgtIC0"
 SHEET_NAME = "Sheet1"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 from gsheetsdb import connect
