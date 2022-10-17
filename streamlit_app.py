@@ -16,7 +16,7 @@ In the meantime, below is an example of what you can do with just a few lines of
 """
 # streamlit_app.py
 
-
+from gspread_pandas import Spread,Client
 from google.oauth2 import service_account
 from gsheetsdb import connect
 
