@@ -239,5 +239,5 @@ if submitted:
 
 expander = st.expander("See all records")
 with expander:
-    st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-    st.dataframe(get_data(gsheet_connector))
+#    st.write(f"Open original [Google Sheet]({GSHEET_URL})")
+#    st.dataframe(get_data(gsheet_connector))
