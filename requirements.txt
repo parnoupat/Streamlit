@@ -47,3 +47,5 @@ urllib3==1.25.10
 wcwidth==0.2.5
 webencodings==0.5.1
 yarg==0.1.9
+# requirements.txt
+gsheetsdb==0.1.13
