@@ -14,7 +14,8 @@ In the meantime, below is an example of what you can do with just a few lines of
 """
 # streamlit_app.py
 
-import streamlit as st
+# streamlit_app.py
+
 from google.oauth2 import service_account
 from gsheetsdb import connect
 
@@ -40,9 +41,7 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 # Print results.
 for row in rows:
-    st.write(f"{row.Name} has a :{row.Surname}:")
-
-
+    st.write(f"{row.name} has a :{row.pet}:")
 
 """
 # My first app
