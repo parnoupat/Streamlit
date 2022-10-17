@@ -21,11 +21,12 @@ from google.oauth2 import service_account
 from gsheetsdb import connect
 
 # Create a connection object.
-scope=["https://www.googleapis.com/auth/spreadsheets"]
+scope = ['https://spreadsheets.google.com/feeds',
+         'https://www.googleapis.com/auth/drive']
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"], scopes=scope,)
 client = Client(scope=scope,creds=credentials)
-spreadsheetname = "Sheet1"
+spreadsheetname = "Streamlit DB"
 spread = Spread(spreadsheetname,client = client) 
 conn = connect(credentials=credentials)
 

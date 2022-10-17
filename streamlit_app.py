@@ -1,106 +1,118 @@
-# Streamlit-Google Sheet
-## Modules
-import streamlit as st 
+import pandas as pd
+import streamlit as st
 from pandas import DataFrame
+import google_auth_httplib2
+import httplib2
 
-from gspread_pandas import Spread,Client
 from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import HttpRequest
 
-# Application Related Module
-import pubchempy as pcp
-from pysmiles import read_smiles
-# 
-import networkx as nx
-import matplotlib.pyplot as plt
+SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+SPREADSHEET_ID = st.secrets["SPREADSHEET_ID"]
+SHEET_NAME = st.secrets["SHEET_NAME"]
+SHEET_RANGE = "!A:C"
+# GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
+GSHEET_URL = st.secrets["private_gsheets_url"]
 
-from datetime import datetime
 
-# Disable certificate verification (Not necessary always)
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
+# from gsheetsdb import connect
 
-# Create a Google Authentication connection object
-scope = ['https://spreadsheets.google.com/feeds',
-         'https://www.googleapis.com/auth/drive']
+# Create a connection object.
+# conn = connect()
 
-credentials = service_account.Credentials.from_service_account_info(
-                st.secrets["gcp_service_account"], scopes = scope)
-client = Client(scope=scope,creds=credentials)
-spreadsheetname = "Sheet1"
-spread = Spread(spreadsheetname,client = client)
+# Perform SQL query on the Google Sheet.
+# Uses st.cache to only rerun when the query changes or after 10 min.
+# @st.cache(ttl=600)
+# def run_query(query):
+#     rows = conn.execute(query, headers=1)
+#     rows = rows.fetchall()
+#     return rows
 
-# Check the connection
-st.write(spread.url)
+# sheet_url = st.secrets["private_gsheets_url"]
+# rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
-sh = client.open(spreadsheetname)
-worksheet_list = sh.worksheets()
 
-# Functions 
-@st.cache()
-# Get our worksheet names
-def worksheet_names():
-    sheet_names = []   
-    for sheet in worksheet_list:
-        sheet_names.append(sheet.title)  
-    return sheet_names
+@st.experimental_singleton()
+def connect_to_gsheet():
+    # Create a connection object.
+    credentials = service_account.Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=[SCOPE],
+    )
 
-# Get the sheet as dataframe
-def load_the_spreadsheet(spreadsheetname):
-    worksheet = sh.worksheet(spreadsheetname)
-    df = DataFrame(worksheet.get_all_records())
+    # Create a new Http() object for every request
+    def build_request(http, *args, **kwargs):
+        new_http = google_auth_httplib2.AuthorizedHttp(
+            credentials, http=httplib2.Http()
+        )
+        return HttpRequest(new_http, *args, **kwargs)
+
+    authorized_http = google_auth_httplib2.AuthorizedHttp(
+        credentials, http=httplib2.Http()
+    )
+    service = build(
+        "sheets",
+        "v4",
+        requestBuilder=build_request,
+        http=authorized_http,
+    )
+    gsheet_connector = service.spreadsheets()
+    return gsheet_connector
+
+
+def get_data(gsheet_connector) -> pd.DataFrame:
+    values = (
+        gsheet_connector.values()
+        .get(
+            spreadsheetId=SPREADSHEET_ID,
+            range=f"{SHEET_NAME}{SHEET_RANGE}",
+        )
+        .execute()
+    )
+
+    df = pd.DataFrame(values["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
     return df
 
-# Update to Sheet
-def update_the_spreadsheet(spreadsheetname,dataframe):
-    col = ['Compound CID','Time_stamp']
-    spread.df_to_sheet(dataframe[col],sheet = spreadsheetname,index = False)
-    st.sidebar.info('Updated to GoogleSheet')
+
+def add_row_to_gsheet(gsheet_connector, row) -> None:
+    gsheet_connector.values().append(
+        spreadsheetId=SPREADSHEET_ID,
+        range=f"{SHEET_NAME}{SHEET_RANGE}",
+        body=dict(values=row),
+        valueInputOption="USER_ENTERED",
+    ).execute()
 
 
-st.header('Streamlit Chemical Inventory')
 
-# Check whether the sheets exists
-what_sheets = worksheet_names()
-#st.sidebar.write(what_sheets)
-ws_choice = st.sidebar.radio('Available worksheets',what_sheets)
 
-# Load data from worksheets
-df = load_the_spreadsheet(ws_choice)
-# Show the availibility as selection
-select_CID = st.sidebar.selectbox('CID',list(df['Compound CID']))
 
-# Now we can use the pubchempy module to dump information
-comp = pcp.Compound.from_cid(select_CID)
-comp_dict = comp.to_dict() # Converting to a dictinoary
-# What Information look for ?
-options = ['molecular_weight' ,'molecular_formula',
-           'charge','atoms','elements','bonds']
-show_me = st.radio('What you want to see?',options)
+gsheet_connector = connect_to_gsheet()
 
-st.info(comp_dict[show_me])
-name = comp_dict['iupac_name']
-st.markdown(name)
-plot = st.checkbox('Canonical Smiles Plot')
+#Form Beginning
+def clear_form():
+    st.session_state["ชื่อ-สกุล"] = ""
+    st.session_state["เบอร์โทรศัพท์"] = ""
+form = st.form(key="annotation")
+with form:
+    st.title('ทดสอบลงทะเบียน LIFF')
+    st.subheader('Test LIFF')
+    name = st.text_input('✍️ชื่อ-สกุล',key='ชื่อ-สกุล')
+    gender = st.radio('เพศ',('ชาย','หญิง'))
+    telephone = st.text_input('เบอร์โทรศัพท์',key='เบอร์โทรศัพท์')
+    submitted = st.form_submit_button(label="Submit")
+    clear = st.form_submit_button(label="Clear", on_click=clear_form)
 
-if plot:
-    sm = comp_dict['canonical_smiles']
-    mol = read_smiles(comp_dict['canonical_smiles']) 
-    elements = nx.get_node_attributes(mol, name = "element")
-    nx.draw(mol, with_labels=True, labels = elements, pos=nx.spring_layout(mol))
-    fig , ax = plt.subplots()
-    nx.draw(mol, with_labels=True, labels = elements, pos = nx.spring_layout(mol))
-    st.pyplot(fig)
 
-add = st.sidebar.checkbox('Add CID')
-if add :  
-    cid_entry = st.sidebar.text_input('New CID')
-    confirm_input = st.sidebar.button('Confirm')
-    
-    if confirm_input:
-        now = datetime.now()
-        opt = {'Compound CID': [cid_entry],
-              'Time_stamp' :  [now]} 
-        opt_df = DataFrame(opt)
-        df = load_the_spreadsheet('Pending CID')
-        new_df = df.append(opt_df,ignore_index=True)
-        update_the_spreadsheet('Pending CID',new_df)
+if submitted:
+    datalist = [[name,
+        gender,
+        telephone]]
+    add_row_to_gsheet(gsheet_connector,datalist)
+
+expander = st.expander("See all records")
+with expander:
+    st.write(f"Open original [Google Sheet]({GSHEET_URL})")
+    st.dataframe(get_data(gsheet_connector))
