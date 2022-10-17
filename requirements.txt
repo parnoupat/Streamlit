@@ -1,13 +1,15 @@
 # requirements.txt
 
 streamlit == 1.12.0
-pandas==1.4.4
-gspread_pandas==2.3.0
-google-auth==1.21.2
-google_api_python_client
-gsheetsdb==0.1.13.1
-google-oauth2-tool ==0.0.3
-gspread==3.4.2
-google-api-python-client 
-google-auth-httplib2==0.1.0
+pandas == 1.4.4
+gspread_pandas == 2.3.0
+google-auth == 1.21.2
+gsheetsdb == 0.1.13.1
+google-oauth2-tool == 0.0.3
+gspread == 3.4.2
+google-api-python-client == 2.64.0
+google-auth-httplib2 == 0.1.0
 google-auth-oauthlib
+httplib2 == 0.20.4
+
+
