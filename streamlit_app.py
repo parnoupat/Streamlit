@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 import streamlit as st
+from pandas import DataFrame
+
+from gspread_pandas import Spread,Client
 
 """
 # Welcome to Streamlit!
