@@ -6,3 +6,6 @@ osmnx
 streamlit==1.13.0
 gspread_pandas
 GSPREAD_RECORD
+google-api-python-client 
+google-auth-httplib2 
+google-auth-oauthlib
