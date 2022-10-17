@@ -43,6 +43,7 @@ for row in rows:
     st.write(f"{row.Name} has a :{row.Surname}:")
 
 
+
 """
 # My first app
 Here's our first attempt at using data to create a table:
