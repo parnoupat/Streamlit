@@ -14,7 +14,6 @@ In the meantime, below is an example of what you can do with just a few lines of
 """
 # streamlit_app.py
 
-# streamlit_app.py
 
 from google.oauth2 import service_account
 from gsheetsdb import connect
@@ -37,7 +36,9 @@ def run_query(query):
     return rows
 
 sheet_url = st.secrets["private_gsheets_url"]
-rows = run_query(f'SELECT * FROM "{sheet_url}"')
+print(sheet_url)
+st.write(sheet_url)
+# rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 # Print results.
 for row in rows:
