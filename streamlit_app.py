@@ -40,6 +40,18 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 
 # sheet_url = st.secrets["private_gsheets_url"]
 # rows = run_query(f'SELECT * FROM "{sheet_url}"')
+
+def read_index_html():
+    with open("index.html") as f:
+        return f.read()
+
+components.html(
+    read_index_html(),
+    height=200,
+)
+
+
+
 LIFF_JS = """
 <script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>
 """
@@ -100,9 +112,19 @@ components.html(Boostrap.read(),height=600,)
 
 js_code = """await fetch("/testLIFF_code.html").then(function(response) {return response.json();})"""
 
+test_js_code = """
+function myFunction(name) {
+  return "Hello " + name;
+}
+myFunction("parnoupat")
+"""
+return_value3 = st_javascript(test_js_code)
+
 return_value2 = st_javascript(js_code)
 
-return_value = st_javascript("""liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
+return_value = st_javascript("""
+
+liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
     if (liff.isLoggedIn()) {
       liff.getProfile().then(profile => {
         const name = profile.displayName;
@@ -114,13 +136,14 @@ return_value = st_javascript("""liff.init({ liffId: "1657566121-pOJyJlDk" }, () 
     } else {
       return 1;
     }
-  }, err => console.error(err.code, error.message))""")
+  }, err => console.error(err.code, error.message))
+  """)
 
 lineliff = st_javascript("""await fetch(liff.getProfile()).then(function(response) {
     return response.json();
 })  """)
 
-st.markdown(f"Return value was: {return_value}")
+st.markdown(f"Return value was: {return_value3}")
 print(f"Return value was: {return_value}")
 
 @st.experimental_singleton()
