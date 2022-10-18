@@ -41,14 +41,10 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 # sheet_url = st.secrets["private_gsheets_url"]
 # rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
-def read_index_html():
-    with open("index.html") as f:
-        return f.read()
 
-components.html(
-    read_index_html(),
-    height=200,
-)
+with open("index.html") as f:
+    st.markdown(f'{f.read()}',unsafe_allow_html=True)
+
 
 
 
