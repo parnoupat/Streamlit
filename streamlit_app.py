@@ -99,7 +99,7 @@ def clear_form():
     st.session_state["ชื่อ-สกุล"] = ""
     st.session_state["เบอร์โทรศัพท์"] = ""
 
-p = open("plot.html")
+p = open("testLIFF.html")
 components.html(p.read())
 
 form = st.form(key="annotation")
