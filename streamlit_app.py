@@ -11,6 +11,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 from streamlit.components.v1 import html
+from streamlit_javascript import st_javascript
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = st.secrets["SPREADSHEET_ID"]
@@ -36,6 +37,33 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 # sheet_url = st.secrets["private_gsheets_url"]
 # rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
+
+st.header("test html import")
+
+HtmlFile = open("testLIFF.html")
+source_code = HtmlFile.read() 
+print(source_code)
+components.html(source_code)
+
+
+st.subheader("Javascript API call")
+components.html("""<script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>
+<script>wait fetch(liff.getProfile()).then(function(response) {
+    return response.json();
+})</script>
+""")
+
+
+return_value = st_javascript("""await fetch("https://reqres.in/api/products/3").then(function(response) {
+    return response.json();
+}) """)
+
+lineliff = st_javascript("""await fetch(liff.getProfile()).then(function(response) {
+    return response.json();
+})  """)
+
+st.markdown(f"Return value was: {lineliff}")
+print(f"Return value was: {return_value}")
 
 @st.experimental_singleton()
 def connect_to_gsheet():
@@ -102,6 +130,8 @@ def clear_form():
 
 p = open("testLIFF.html")
 components.html(p.read())
+
+
 
 # Define your javascript
 my_js = """
