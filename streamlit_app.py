@@ -40,28 +40,7 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 
 # sheet_url = st.secrets["private_gsheets_url"]
 # rows = run_query(f'SELECT * FROM "{sheet_url}"')
-LIFF_JS = """
-<script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>
-<script>
-  function runApp() {
-    liff.getProfile().then(profile => {
-      document.getElementById("pictureUrl").src = profile.pictureUrl;
-      document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId;
-      document.getElementById("displayName").innerHTML = '<b>DisplayName:</b> ' + profile.displayName;
-      document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
-      document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
-    }).catch(err => console.error(err));
-    return profile.displayName
-  }
-  liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
-    if (liff.isLoggedIn()) {
-      runApp()
-    } else {
-      liff.login();
-    }
-  }, err => console.error(err.code, error.message));
-</script>
-    """
+LIFF_JS = """<script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>"""
 
 index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
 logging.info(f'editing {index_path}')
