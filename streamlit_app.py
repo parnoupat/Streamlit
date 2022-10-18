@@ -44,7 +44,8 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 
 with open("index.html") as f:
     st.markdown(f'<body>{f.read()}</body>',unsafe_allow_html=True)
-
+    return_value3 = st_javascript(f.read())
+    st.markdown(f"Return value was: {return_value3}")
 
 
 
@@ -114,7 +115,7 @@ function myFunction(name) {
 }
 myFunction("parnoupat")
 """
-return_value3 = st_javascript(test_js_code)
+
 
 return_value2 = st_javascript(js_code)
 
