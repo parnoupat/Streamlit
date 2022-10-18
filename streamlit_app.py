@@ -8,6 +8,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import logging
 import pathlib
+import shutil
 
 from bs4 import BeautifulSoup
 from google.oauth2 import service_account
