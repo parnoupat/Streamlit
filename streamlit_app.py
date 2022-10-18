@@ -3,6 +3,9 @@ import streamlit as st
 from pandas import DataFrame
 import google_auth_httplib2
 import httplib2
+import streamlit as st
+import streamlit.components.v1 as components
+
 
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
@@ -95,6 +98,10 @@ gsheet_connector = connect_to_gsheet()
 def clear_form():
     st.session_state["ชื่อ-สกุล"] = ""
     st.session_state["เบอร์โทรศัพท์"] = ""
+
+p = open("plot.html")
+components.html(p.read())
+
 form = st.form(key="annotation")
 with form:
     st.title('ทดสอบลงทะเบียน LIFF')
