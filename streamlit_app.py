@@ -41,9 +41,7 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 st.header("test html import")
 
 HtmlFile = open("testLIFF.html")
-source_code = HtmlFile.read() 
-print(source_code)
-components.html(source_code)
+components.html(HtmlFile.read())
 
 
 st.subheader("Javascript API call")
@@ -128,10 +126,6 @@ def clear_form():
     st.session_state["ชื่อ-สกุล"] = ""
     st.session_state["เบอร์โทรศัพท์"] = ""
 
-p = open("testLIFF.html")
-components.html(p.read())
-
-
 
 # Define your javascript
 my_js = """
@@ -144,6 +138,7 @@ my_html = f"<script>{my_js}</script>"
 # Execute your app
 st.title("Javascript example")
 html(my_html)
+
 
 form = st.form(key="annotation")
 with form:
