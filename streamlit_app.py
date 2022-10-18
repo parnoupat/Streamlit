@@ -66,8 +66,8 @@ LIFF_JS = """
 index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
 logging.info(f'editing {index_path}')
 soup = BeautifulSoup(index_path.read_text(), features="html.parser")
-html = str(soup)
-new_html = html.replace('<head>', '<head>\n' + LIFF_JS)
+htmls = str(soup)
+new_html = htmls.replace('<head>', '<head>\n' + LIFF_JS)
 index_path.write_text(new_html)
 
 
