@@ -10,6 +10,7 @@ import streamlit.components.v1 as components
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
+from streamlit.components.v1 import html
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = st.secrets["SPREADSHEET_ID"]
@@ -101,6 +102,18 @@ def clear_form():
 
 p = open("testLIFF.html")
 components.html(p.read())
+
+# Define your javascript
+my_js = """
+alert("Hello JavaScript");
+"""
+
+# Wrapt the javascript as html code
+my_html = f"<script>{my_js}</script>"
+
+# Execute your app
+st.title("Javascript example")
+html(my_html)
 
 form = st.form(key="annotation")
 with form:
