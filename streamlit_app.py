@@ -88,8 +88,7 @@ js_code = """await fetch("/testLIFF_code.html").then(function(response) {return 
 
 return_value2 = st_javascript(js_code)
 
-return_value = st_javascript("""
-liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
+return_value = st_javascript("""liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
     if (liff.isLoggedIn()) {
       liff.getProfile().then(profile => {
         const name = profile.displayName;
@@ -101,8 +100,7 @@ liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
     } else {
       return 1;
     }
-  }, err => console.error(err.code, error.message));
-""")
+  }, err => console.error(err.code, error.message))""")
 
 lineliff = st_javascript("""await fetch(liff.getProfile()).then(function(response) {
     return response.json();
