@@ -1,3 +1,4 @@
+from lib2to3.pgen2.grammar import opmap_raw
 import pandas as pd
 import streamlit as st
 from pandas import DataFrame
@@ -41,8 +42,10 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 st.header("test html import")
 
 HtmlFile = open("testLIFF.html")
+Boostrap = open("Boostrap_script.html")
 components.html("""<head><script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script></head>""")
 components.html(HtmlFile.read())
+components.html(Boostrap.read(),height=600,)
 
 
 
