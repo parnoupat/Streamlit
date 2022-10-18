@@ -9,9 +9,20 @@
       document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
     }).catch(err => console.error(err));
   }
+
+  function runApp2() {
+    liff
+  .getProfile()
+  .then((profile) => {
+    const name = profile.displayName;
+  })
+  .catch((err) => {
+    console.log("error", err);
+  });
+  }
   liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
     if (liff.isLoggedIn()) {
-      runApp()
+      runApp2()
     } else {
       liff.login();
     }
