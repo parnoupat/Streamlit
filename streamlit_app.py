@@ -47,9 +47,7 @@ components.html("""<head><script src="https://static.line-scdn.net/liff/edge/ver
 components.html(HtmlFile.read(),height=600,)
 components.html(Boostrap.read(),height=600,)
 
-js_code = """await fetch("/testLIFF_code.html")
-    .then(function(response) {return response.json();})
-    """
+js_code = """await fetch("/testLIFF_code.html").then(function(response) {return response.json();})"""
 
 return_value2 = st_javascript(js_code)
 
