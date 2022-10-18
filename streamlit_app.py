@@ -80,7 +80,7 @@ components.html(html_string)
 
 HtmlFile = open("testLIFF.html")
 Boostrap = open("Boostrap_script.html")
-components.html("""<head><script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script></head>""")
+components.html("""<head><script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script></head>""",height=600,)
 components.html(HtmlFile.read(),height=600,)
 components.html(Boostrap.read(),height=600,)
 
@@ -106,7 +106,8 @@ lineliff = st_javascript("""await fetch(liff.getProfile()).then(function(respons
     return response.json();
 })  """)
 
-st.markdown(f"Return value was: {return_value}")
+st.write(<some stuff that includes HTML and javascript>, allow_javascript=True, allow_html=True)
+st.markdown(f"Return value was: {return_value}",allow_unsafe_html=True)
 print(f"Return value was: {return_value}")
 
 @st.experimental_singleton()
