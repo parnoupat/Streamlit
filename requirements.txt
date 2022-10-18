@@ -2,6 +2,7 @@
 git+https://github.com/googleapis/google-auth-library-python-httplib2
 altair==4.2.0
 attrs==22.1.0
+beautifulsoup4==4.11.1
 blinker==1.5
 cachetools==5.2.0
 charset-normalizer==2.1.1
