@@ -93,13 +93,13 @@ liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
     if (liff.isLoggedIn()) {
       liff.getProfile().then(profile => {
         const name = profile.displayName;
-        return name;
+        return 3;
   })
   .catch((err) => {
     console.log("error", err);
   });
     } else {
-      liff.login();
+      return 1;
     }
   }, err => console.error(err.code, error.message));
 """)
