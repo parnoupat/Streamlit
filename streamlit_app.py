@@ -43,7 +43,7 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 
 
 with open("index.html") as f:
-    st.markdown(f'{f.read()}',unsafe_allow_html=True)
+    st.markdown(f'<head>{f.read()}</head>',unsafe_allow_html=True)
 
 
 
