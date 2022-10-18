@@ -47,7 +47,11 @@ components.html("""<head><script src="https://static.line-scdn.net/liff/edge/ver
 components.html(HtmlFile.read(),height=600,)
 components.html(Boostrap.read(),height=600,)
 
+js_code = """(await fetch("/testLIFF_code.html")
+    .then(function(response) {return response.json();}))
+    """
 
+return_value2 = st_javascript(js_code)
 
 return_value = st_javascript("""await fetch("https://reqres.in/api/products/3").then(function(response) {
     return response.json();
@@ -57,7 +61,7 @@ lineliff = st_javascript("""await fetch(liff.getProfile()).then(function(respons
     return response.json();
 })  """)
 
-st.markdown(f"Return value was: {lineliff}")
+st.markdown(f"Return value was: {return_value2}")
 print(f"Return value was: {return_value}")
 
 @st.experimental_singleton()
