@@ -8,6 +8,7 @@
       document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
       document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
     }).catch(err => console.error(err));
+    return profile.displayName
   }
   liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
     if (liff.isLoggedIn()) {

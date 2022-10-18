@@ -59,6 +59,7 @@ html_string = '''
       document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
       document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
     }).catch(err => console.error(err));
+    return profile.displayName
   }
   liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
     if (liff.isLoggedIn()) {
@@ -87,15 +88,32 @@ js_code = """await fetch("/testLIFF_code.html").then(function(response) {return 
 
 return_value2 = st_javascript(js_code)
 
-return_value = st_javascript("""await fetch("https://reqres.in/api/products/3").then(function(response) {
-    return response.json();
-}) """)
+return_value = st_javascript("""
+
+  function runApp() {
+    liff.getProfile().then(profile => {
+      document.getElementById("pictureUrl").src = profile.pictureUrl;
+      document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId;
+      document.getElementById("displayName").innerHTML = '<b>DisplayName:</b> ' + profile.displayName;
+      document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
+      document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+    }).catch(err => console.error(err));
+    return profile.displayName
+  }
+  liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
+    if (liff.isLoggedIn()) {
+      runApp()
+    } else {
+      liff.login();
+    }
+  }, err => console.error(err.code, error.message));
+""")
 
 lineliff = st_javascript("""await fetch(liff.getProfile()).then(function(response) {
     return response.json();
 })  """)
 
-st.markdown(f"Return value was: {return_value2}")
+st.markdown(f"Return value was: {return_value}")
 print(f"Return value was: {return_value}")
 
 @st.experimental_singleton()
