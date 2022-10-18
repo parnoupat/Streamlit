@@ -41,6 +41,42 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 
 st.header("test html import")
 
+html_string = '''
+<h1>HTML string in RED</h1>
+  <img id="pictureUrl" width="25%">
+  <p id="userId"></p>
+  <p id="displayName"></p>
+  <p id="statusMessage"></p>
+  <p id="getDecodedIDToken"></p>
+
+<script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>
+<script language="javascript">
+  function runApp() {
+    liff.getProfile().then(profile => {
+      document.getElementById("pictureUrl").src = profile.pictureUrl;
+      document.getElementById("userId").innerHTML = '<b>UserId:</b> ' + profile.userId;
+      document.getElementById("displayName").innerHTML = '<b>DisplayName:</b> ' + profile.displayName;
+      document.getElementById("statusMessage").innerHTML = '<b>StatusMessage:</b> ' + profile.statusMessage;
+      document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+    }).catch(err => console.error(err));
+  }
+  liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
+    if (liff.isLoggedIn()) {
+      runApp()
+    } else {
+      liff.login();
+    }
+  }, err => console.error(err.code, error.message));
+</script>
+<script language="javascript">
+   document.querySelector("h1").style.color = "red";
+   console.log("Streamlit runs JavaScript");
+   alert("Streamlit runs JavaScript");
+</script>
+'''
+
+components.html(html_string)
+
 HtmlFile = open("testLIFF.html")
 Boostrap = open("Boostrap_script.html")
 components.html("""<head><script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script></head>""")
