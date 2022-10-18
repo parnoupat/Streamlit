@@ -41,15 +41,9 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 st.header("test html import")
 
 HtmlFile = open("testLIFF.html")
+components.html("""<head><script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script></head>""")
 components.html(HtmlFile.read())
 
-
-st.subheader("Javascript API call")
-components.html("""<script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>
-<script>wait fetch(liff.getProfile()).then(function(response) {
-    return response.json();
-})</script>
-""")
 
 
 return_value = st_javascript("""await fetch("https://reqres.in/api/products/3").then(function(response) {
