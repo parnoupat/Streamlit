@@ -139,8 +139,7 @@ lineliff = st_javascript("""await fetch(liff.getProfile()).then(function(respons
     return response.json();
 })  """)
 
-st.markdown(f"Return value was: {return_value}",
-    allow_unsafe_html=True)
+st.markdown(f"Return value was: {return_value}")
 print(f"Return value was: {return_value}")
 
 @st.experimental_singleton()
