@@ -40,7 +40,9 @@ GSHEET_URL = st.secrets["private_gsheets_url"]
 
 # sheet_url = st.secrets["private_gsheets_url"]
 # rows = run_query(f'SELECT * FROM "{sheet_url}"')
-LIFF_JS = """<script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>"""
+LIFF_JS = """
+<script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>
+"""
 
 index_path = pathlib.Path(st.__file__).parent / "static" / "index.html"
 logging.info(f'editing {index_path}')
