@@ -44,7 +44,7 @@ st.header("test html import")
 HtmlFile = open("testLIFF.html")
 Boostrap = open("Boostrap_script.html")
 components.html("""<head><script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script></head>""")
-components.html(HtmlFile.read())
+components.html(HtmlFile.read(),height=600,)
 components.html(Boostrap.read(),height=600,)
 
 
