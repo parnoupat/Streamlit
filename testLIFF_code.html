@@ -1,8 +1,13 @@
 <script src="https://static.line-scdn.net/liff/edge/versions/2.9.0/sdk.js"></script>
 <script>
   function runApp() {
-    data = liff.getProfile();
-    return data
+    liff.getProfile().then((profile) => {
+    const name = profile.displayName;
+  })
+  .catch((err) => {
+    console.log("error", err);
+  });
+    return name
   }
   liff.init({ liffId: "1657566121-pOJyJlDk" }, () => {
     if (liff.isLoggedIn()) {
@@ -11,5 +16,8 @@
       liff.login();
     }
   }, err => console.error(err.code, error.message));
+
+
+  
 </script>
 
