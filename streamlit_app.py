@@ -221,6 +221,43 @@ my_html = f"<script>{my_js}</script>"
 st.title("Javascript example")
 html(my_html)
 
+LIFF_jss = """
+      if (1+1==2) {
+        alert("Liff Loged in");
+      } else {
+        alert("Liff NOT Loged in");
+      }
+"""
+
+LIFF_js = """
+    async function getUserProfile() {
+      const profile = await liff.getProfile()
+    }
+  async function main() {
+      await liff.init({ liffId: "Y1657566121-pOJyJlDk" })
+      if (liff.isInClient()) {
+        getUserProfile()
+      } else {
+        if (liff.isLoggedIn()) {
+          getUserProfile()
+          alert('Liff Loged in');
+        } else {
+          alert('Liff NOT Loged in');
+        }
+      }
+    }
+  main()
+"""
+
+
+# Wrapt the javascript as html code
+my_htmlhead = f'<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script><script>{LIFF_js}</script>'
+
+# Execute your app
+st.title("Javascript example2 with head")
+html(my_htmlhead)
+
+
 
 form = st.form(key="annotation")
 with form:

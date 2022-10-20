@@ -24,3 +24,23 @@
   <p id="displayName"></p>
   <p id="statusMessage"></p>
   <p id="getDecodedIDToken"></p>
+
+<script>
+  async function getUserProfile() {
+      const profile = await liff.getProfile()
+    }
+  async function main() {
+      await liff.init({ liffId: "Y1657566121-pOJyJlDk" })
+      if (liff.isInClient()) {
+        getUserProfile()
+      } else {
+        if (liff.isLoggedIn()) {
+          getUserProfile()
+          alert('Liff Loged in');
+        } else {
+          alert('Liff NOT Loged in');
+        }
+      }
+    }
+  main()
+  </script>
