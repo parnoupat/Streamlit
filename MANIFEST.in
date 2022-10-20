@@ -1,0 +1,3 @@
+recursive-include src/st-liff/frontend *
+include README.md
+include LICENSE
