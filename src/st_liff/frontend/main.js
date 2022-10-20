@@ -3,6 +3,7 @@
 // If you get an error about "Streamlit" not being defined, that
 // means you're missing that file.
 
+
 function sendValue(value) {
   Streamlit.setComponentValue(value)
 }
